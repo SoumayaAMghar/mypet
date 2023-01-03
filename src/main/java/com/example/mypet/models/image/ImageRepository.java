@@ -1,8 +1,8 @@
-package com.example.mypet.animal;
+package com.example.mypet.models.image;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AnimalRepository extends JpaRepository<Animal,Long> {
+public interface ImageRepository extends JpaRepository<Image,Long> {
 }

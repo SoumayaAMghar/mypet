@@ -1,4 +1,4 @@
-package com.example.mypet.animal;
+package com.example.mypet.models.image;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,11 +8,10 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Animal {
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String type;
-    private String age;
 }
+

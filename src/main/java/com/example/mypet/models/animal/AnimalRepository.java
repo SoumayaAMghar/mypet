@@ -1,8 +1,8 @@
-package com.example.mypet.person.adoptant;
+package com.example.mypet.models.animal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdoptantRepository extends JpaRepository<Adoptant,Long> {
+public interface AnimalRepository extends JpaRepository<Animal,Long> {
 }

@@ -1,40 +1,44 @@
-package com.example.mypet.post;
+package com.example.mypet.models.person;
 
-import jakarta.annotation.Nonnull;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
 
-@Entity
+@MappedSuperclass
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Post {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @NonNull
-    private String titre;
+    protected String name;
     @NonNull
-    private String description;
-    private String ville;
-    private Integer nbr_jours;
-    private Double prix;
+    protected String email;
+    @NonNull
+    protected String password;
+    @NonNull
+    protected String address;
+    @NonNull
+    protected String tel;
+    @NonNull
+    protected UserRoles role;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Post post = (Post) o;
-        return id != null && Objects.equals(id, post.id);
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
     }
 
     @Override
