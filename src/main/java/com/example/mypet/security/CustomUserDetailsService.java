@@ -26,6 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println("am in loadUserByUsername now ^_^");
         com.example.mypet.models.person.User user = clientRepository.findByEmail(email).isPresent()
                 ? clientRepository.findByEmail(email).get()
                 : adoptantRepository.findByEmail(email)

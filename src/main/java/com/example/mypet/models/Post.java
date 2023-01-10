@@ -1,12 +1,13 @@
-package com.example.mypet.models.post;
+package com.example.mypet.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.mypet.models.person.Client;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import javax.swing.event.CaretListener;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,7 +16,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Post {
+public class Post implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,4 +41,13 @@ public class Post {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+    @ManyToOne
+    private Client client;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Commentaire> commentaires;
+
+    @OneToMany(mappedBy = "post")
+    private List<Image> images;
 }

@@ -1,9 +1,13 @@
 package com.example.mypet.models.person;
 
+import com.example.mypet.models.Commentaire;
+import com.example.mypet.models.Post;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -29,4 +33,7 @@ public class Client extends User {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+    @OneToMany(mappedBy = "client")
+    private List<Post> posts;
 }
