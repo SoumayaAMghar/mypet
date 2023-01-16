@@ -1,5 +1,7 @@
 package com.example.mypet.models;
 
+import com.example.mypet.models.person.Adoptant;
+import com.example.mypet.models.person.Client;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,4 +24,12 @@ public class Commentaire {
     private List<Reponse> reponses;
     @ManyToOne
     private Post post;
+
+
+//    @ManyToOne
+//    private Adoptant adoptant;
+//
+//    @ManyToOne
+//    private Client client;
+
 }

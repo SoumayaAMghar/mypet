@@ -1,9 +1,6 @@
 package com.example.mypet.models.person;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -30,6 +27,7 @@ public class User {
     protected String address;
     @NonNull
     protected String tel;
+    @Enumerated
     @NonNull
     protected UserRoles role;
 

@@ -1,7 +1,7 @@
 package com.example.mypet.controller;
 
 import com.example.mypet.dto.AuthResponseDto;
-import com.example.mypet.dto.LoginDto;
+import com.example.mypet.dto.AuthRequestDto;
 import com.example.mypet.dto.RegisterDto;
 import com.example.mypet.models.person.Adoptant;
 import com.example.mypet.models.person.Client;
@@ -11,7 +11,6 @@ import com.example.mypet.repository.ClientRepository;
 import com.example.mypet.security.JWTGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,7 +42,7 @@ public class AuthController {
         if (clientRepository.existsClientByEmail(registerDto.email()) || adoptantRepository.existsAdoptantByEmail(registerDto.email())) {
             return new ResponseEntity<>("Email is taken! ", HttpStatus.BAD_REQUEST);
         }
-
+        System.out.println(registerDto.role());
         if (registerDto.role().equals(UserRoles.ADOPTANT)) {
             Adoptant adoptant = new Adoptant(registerDto.name(), registerDto.email(), passwordEncoder.encode(registerDto.password()), registerDto.address(), registerDto.tel(), registerDto.nbr_animaux(), registerDto.role());
             adoptantRepository.save(adoptant);
@@ -55,14 +54,13 @@ public class AuthController {
     }
 
     @PostMapping(value = "login")
-    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<AuthResponseDto> login(@RequestBody AuthRequestDto authRequestDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginDto.email(),
-                        loginDto.password()));
+                        authRequestDto.email(),
+                        authRequestDto.password()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
         return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
     }
-
 }
